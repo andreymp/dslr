@@ -5,7 +5,6 @@ from ft import count, mean, std, min, percentille_25, percentille_50, percentill
 
 def describe(dataset: pd.DataFrame):
     dataset_funcs = [count, mean, std, min, percentille_25, percentille_50, percentille_75, max]
-    dataset = dataset[dataset.select_dtypes(include=np.number).columns.array[3:]]
 
     description: pd.DataFrame = dataset.agg(dataset_funcs)
     description.rename(index={'percentille_25': '25%', 'percentille_50': '50%', 'percentille_75': '75%'}, inplace=True)
@@ -14,7 +13,9 @@ def describe(dataset: pd.DataFrame):
 
 def read_dataset(filename):
     try:
-        return pd.read_csv(filename)
+        dataset = pd.read_csv(filename)
+        dataset = dataset[dataset.select_dtypes(include=np.number).columns.array[1:]]
+        return dataset
     except IOError:
         print('Imposiible to read dataset')
         return None
@@ -24,7 +25,7 @@ if __name__ == '__main__':
         if not sys.argv[1].endswith('.csv'):
             print("Wrong dataset extension")
             sys.exit()
-        dataset = read_dataset(str(sys.argv[1]))
+        dataset = read_dataset(str(sys.argv[1]), 3)
         if dataset is None:
             sys.exit()
         describe(dataset)
