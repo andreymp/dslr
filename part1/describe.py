@@ -25,7 +25,7 @@ if __name__ == '__main__':
         if not sys.argv[1].endswith('.csv'):
             print("Wrong dataset extension")
             sys.exit()
-        dataset = read_dataset(str(sys.argv[1]), 3)
+        dataset = read_dataset(str(sys.argv[1]))
         if dataset is None:
             sys.exit()
         describe(dataset)

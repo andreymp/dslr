@@ -9,7 +9,7 @@ def pair_plot(dataset: pd.DataFrame):
 
     plt.title("Pairplot for all features")
     
-    sns.pairplot(dataset, x_vars=features, y_vars=features, corner=True)
+    sns.pairplot(dataset, x_vars=features, y_vars=features, corner=True, hue='Hogwarts House')
     
     plt.savefig('./pair_plot.png')
 

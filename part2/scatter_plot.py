@@ -7,7 +7,7 @@ def scatter_plot(dataset: pd.DataFrame, feature_1, feature_2):
     plt.figure()
     plt.title(f"Scatter plot for comparison scores {feature_1} vs. {feature_2}")
     
-    sns.scatterplot(data=dataset, x=feature_1, y=feature_2)
+    sns.scatterplot(data=dataset, x=feature_1, y=feature_2, hue='Hogwarts House')
 
     plt.show()
 

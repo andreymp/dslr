@@ -68,7 +68,7 @@ def ft_not_nan(series):
     return series[series.notna()]
 
 def ft_notna(elem):
-    elem == elem
+    return elem == elem
 
 def ft_sum(series):
     filtered_series = np.array(ft_not_nan(series))
