@@ -9,7 +9,7 @@ def mean(series):
     filtered_series = ft_not_nan(series)
     filtered_series_length = len(filtered_series)
     
-    if filtered_series_length == 0:
+    if not filtered_series_length:
         return np.nan
     
     return ft_sum(filtered_series) / filtered_series_length
@@ -18,12 +18,12 @@ def std(series):
     filtered_series = np.array(ft_not_nan(series))
     n = len(filtered_series)
     
-    if n == 0:
+    if not n:
         return np.nan
     
     mean_value = mean(series)
     sum = 0
-    
+
     for num in filtered_series:
         sum += (num - mean_value) ** 2
     
@@ -33,7 +33,7 @@ def min(series):
     filtered_series = np.array(ft_not_nan(series))
     min = sys.maxsize
     
-    if len(filtered_series) == 0:
+    if not len(filtered_series):
         return np.nan
     
     for num in filtered_series:
@@ -99,3 +99,12 @@ def ft_percentille(series, percent):
         return sorted_filtered_series[floor_index]
     
     return sorted_filtered_series[floor_index] + ceil_index * (sorted_filtered_series[floor_index + 1] - sorted_filtered_series[floor_index])
+
+def ft_rms(series):
+    filtered_series = ft_not_nan(series)
+    n = len(filtered_series)
+    
+    if n == 0:
+        return np.nan
+
+    return sqrt(mean(filtered_series ** 2))

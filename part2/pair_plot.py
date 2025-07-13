@@ -6,11 +6,9 @@ import matplotlib.pyplot as plt
 
 def pair_plot(dataset: pd.DataFrame):
     features = dataset.select_dtypes(include=np.number).columns
-
+    
     plt.title("Pairplot for all features")
-    
-    sns.pairplot(dataset, x_vars=features, y_vars=features, corner=True, hue='Hogwarts House')
-    
+    sns.pairplot(dataset, x_vars=features, y_vars=features, corner=False, hue='Hogwarts House')
     plt.savefig('./pair_plot.png')
 
 def read_dataset(filename):

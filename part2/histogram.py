@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 
 def histogram(dataset: pd.DataFrame, feature):
     grouped_dataset = dataset.groupby('Hogwarts House')[feature]
-    
     grouped_dataset.plot(kind='hist', title=f"Score distribution in {feature}", x='Score', alpha=0.2, legend=True)
-    
     plt.show()
 
 def read_dataset(filename):
