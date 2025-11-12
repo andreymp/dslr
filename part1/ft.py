@@ -18,7 +18,7 @@ def std(series):
     filtered_series = np.array(ft_not_nan(series))
     n = len(filtered_series)
     
-    if not n:
+    if n <= 1:
         return np.nan
     
     mean_value = mean(series)
@@ -31,16 +31,17 @@ def std(series):
 
 def min(series):
     filtered_series = np.array(ft_not_nan(series))
-    min = sys.maxsize
     
     if not len(filtered_series):
         return np.nan
     
-    for num in filtered_series:
-        if num < min:
-            min = num
+    min_val = filtered_series[0]
     
-    return min
+    for num in filtered_series[1:]:
+        if num < min_val:
+            min_val = num
+    
+    return min_val
 
 def percentille_25(series):
     return ft_percentille(series, 25)
@@ -53,16 +54,17 @@ def percentille_75(series):
 
 def max(series):
     filtered_series = np.array(ft_not_nan(series))
-    max = -sys.maxsize - 1
     
     if len(filtered_series) == 0:
         return np.nan
     
-    for num in filtered_series:
-        if num > max:
-            max = num
+    max_val = filtered_series[0]
     
-    return max
+    for num in filtered_series[1:]:
+        if num > max_val:
+            max_val = num
+    
+    return max_val
 
 def ft_not_nan(series):
     return series[series.notna()]
@@ -72,12 +74,12 @@ def ft_notna(elem):
 
 def ft_sum(series):
     filtered_series = np.array(ft_not_nan(series))
-    sum = 0.0
+    total = 0.0
 
     for num in filtered_series:
-        sum += num
+        total += num
     
-    return sum
+    return total
 
 def ft_sort(series):
     return np.sort(np.array(ft_not_nan(series)))

@@ -16,7 +16,7 @@ def gradient(X: np.ndarray, y: np.ndarray, theta: np.ndarray, m: int) -> np.ndar
     error = y_pred - y
     return (1 / m) * X.T @ error
 
-def batch_logreg(X: np.ndarray, y: np.ndarray, lr: float = 0.1, epochs: int = 100000) -> np.ndarray:
+def batch_logreg(X: np.ndarray, y: np.ndarray, lr: float = 0.12, epochs: int = 400000) -> np.ndarray:
     m, n = X.shape
     theta: np.ndarray = np.zeros(n)
 
@@ -46,19 +46,20 @@ def mini_batch_logreg(X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: in
 
     return theta
 
-def sochastic_logreg(X: np.ndarray, y: np.ndarray, lr: float = 0.001, epochs: int = 1000) -> np.ndarray:
+def sochastic_logreg(X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 100) -> np.ndarray:
     m, n = X.shape
     theta: np.ndarray = np.zeros(n)
 
     for _ in range(epochs):
-        for idx in range(m):
-            Xi = X[idx, :]
+        idx_list: np.ndarray = np.random.permutation(m)
+        for idx in idx_list:
+            Xi = X[idx, :].reshape(1, -1)
             yi = y[idx]
 
-            yi_pred = Xi @ theta
+            yi_pred = sigmoid(Xi @ theta)[0]
             error = yi_pred - yi
-            grad = Xi * error
-            theta -= lr * grad
+            grad = Xi.T * error
+            theta -= lr * grad.flatten()
 
     print(f"Loss: {loss(X, y, theta):.3f}")  
 

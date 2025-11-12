@@ -20,7 +20,7 @@ def describe(dataset: pd.DataFrame):
 
     description: pd.DataFrame = dataset.agg(dataset_funcs)
     description.rename(index={'percentille_25': '25%', 'percentille_50': '50%', 'percentille_75': '75%'}, inplace=True)
-    description.map(lambda elem: f"{elem:0.6f}")
+    description = description.map(lambda elem: f"{elem:0.6f}")
     print(description)
 
 def read_dataset(filename):

@@ -8,23 +8,17 @@ def sigmoid(z: np.ndarray) -> np.ndarray:
 
 def load_test_data(filename: str = "dataset_test.csv") -> Tuple[np.ndarray, np.ndarray]:
     df: pd.DataFrame = pd.read_csv(filename)
-    if not filename == "dataset_test.csv":
-        df = df.dropna()
     selected_features: list[str] = [
         "Defense Against the Dark Arts",
+        "Herbology",
         "Charms",
-        # "Potions",
-        # "Astronomy",
-        # "Arithmancy",
-        # "Muggle Studies",
-        # "Herbology",
-        # "Divination",
-        # "Transfiguration",
-        # "Care of Magical Creatures",
-        # "History of Magic",
-        # "Ancient Runes",
         "Flying"
     ]
+    
+    # Fill NaN with mean for BOTH training and test
+    for feature in selected_features:
+        df[feature] = df[feature].fillna(df[feature].mean())
+    
     X: np.ndarray = df[selected_features].values
     y: np.ndarray = df['Hogwarts House'].values
     index: np.ndarray = df.index.to_numpy()
