@@ -15,7 +15,6 @@ def load_test_data(filename: str = "dataset_test.csv") -> Tuple[np.ndarray, np.n
         "Flying"
     ]
     
-    # Fill NaN with mean for BOTH training and test
     for feature in selected_features:
         df[feature] = df[feature].fillna(df[feature].mean())
     

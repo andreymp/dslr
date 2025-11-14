@@ -2,6 +2,22 @@ import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 
+features = [
+    "Arithmancy",
+    "Astronomy",
+    "Herbology",
+    "Defense Against the Dark Arts",
+    "Divination",
+    "Muggle Studies",
+    "Ancient Runes",
+    "History of Magic",
+    "Transfiguration",
+    "Potions",
+    "Care of Magical Creatures",
+    "Charms",
+    "Flying",
+]
+
 def histogram(dataset: pd.DataFrame, feature):
     grouped_dataset = dataset.groupby('Hogwarts House')[feature]
     grouped_dataset.plot(kind='hist', title=f"Score distribution in {feature}", x='Score', alpha=0.2, legend=True)
@@ -25,6 +41,9 @@ if __name__ == '__main__':
         if dataset is None:
             sys.exit()
         feature = input('Enter feature:\n- Arithmancy\n- Astronomy\n- Herbology\n- Defense Against the Dark Arts\n- Divination\n- Muggle Studies\n- Ancient Runes\n -History of Magic\n -Transfiguration\n -Potions\n- Care of Magical Creatures\n- Charms\n- Flying\n')
+        if not feature in features:
+            print(f"'{feature}' does not exist among features")
+            sys.exit()
         histogram(dataset, feature)
     else:
         print("Wrong number of arguments")
